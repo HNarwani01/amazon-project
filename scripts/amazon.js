@@ -1,4 +1,5 @@
 import {cart} from '../data/cart.js';//we cal also do import {cart as anyVariableName } from 'path';
+import {product} from '../data/products.js';
 
 product.forEach ((products)=> {
   let templateHtml = `<div class="product-container">
