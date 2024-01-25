@@ -1,5 +1,6 @@
 import { cart } from "../data/cart.js";
 import { product } from "../data/products.js";
+import {formatcurrency} from '../utils/monkey.js'
 cart.forEach(cartelement => {
   product.forEach(totalproduct => {
     if (cartelement.productid == totalproduct.id) {
@@ -17,7 +18,7 @@ cart.forEach(cartelement => {
       ${totalproduct.name}
     </div>
     <div class="product-price">
-      $${(totalproduct.priceCents/100).toFixed(2)}
+      $${formatcurrency(totalproduct.priceCents)}
     </div>
     <div class="product-quantity">
       <span>
