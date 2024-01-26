@@ -1,34 +1,29 @@
 import { cart } from "../data/cart.js";
 import { product } from "../data/products.js";
 import {formatcurrency} from '../utils/money.js'
-let productfound=[];
 cart.forEach(cartelement => {
   product.forEach(totalproduct => {
     if (cartelement.productid == totalproduct.id) {
-      productfound.push(totalproduct);
-    }
-  });
-});
-productfound.forEach(product=>{
-  let insidehtml = `<div class="cart-item-container">
+      
+      let insidehtml = `<div class="cart-item-container">
 <div class="delivery-date">
   Delivery date: Tuesday, June 21
 </div>
 
 <div class="cart-item-details-grid">
   <img class="product-image"
-    src="${product.image}">
+    src="${totalproduct.image}">
 
   <div class="cart-item-details">
     <div class="product-name">
-      ${product.name}
+      ${totalproduct.name}
     </div>
     <div class="product-price">
-      $${formatcurrency(product.priceCents)}
+      $${formatcurrency(totalproduct.priceCents)}
     </div>
     <div class="product-quantity">
       <span>
-        Quantity: <span class="quantity-label">${product.quantity}</span>
+        Quantity: <span class="quantity-label">${cartelement.quantity}</span>
       </span>
       <span class="update-quantity-link link-primary">
         Update
@@ -86,8 +81,9 @@ productfound.forEach(product=>{
 </div>
 </div>`;
       document.querySelector('.js-order-summary').innerHTML += insidehtml;
-})
-console.log(productfound);
+    }
+  });
+});
 
 
 
