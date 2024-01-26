@@ -1,4 +1,4 @@
-import { cart,remoceFromCart } from "../data/cart.js";
+import { cart,removeFromCart } from "../data/cart.js";
 import { product } from "../data/products.js";
 import {formatcurrency} from '../utils/money.js'
 
@@ -91,7 +91,7 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((link) =>{
     console.log(`deleting now`)
     const produt =link.dataset.productId;
     console.log(produt);
-    remoceFromCart(produt)
+    removeFromCart(produt)
     console.log(cart)
     document.querySelector(`.js-cart-item-container-${produt}`).remove()
   })
