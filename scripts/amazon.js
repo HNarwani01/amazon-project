@@ -1,6 +1,6 @@
 import {cart,addtocart} from '../data/cart.js';//we cal also do import {cart as anyVariableName } from 'path';
 import {product} from '../data/products.js';
-import {formatcurrency} from '../utils/monkey.js'
+import {formatcurrency} from '../utils/money.js'
 
 product.forEach ((products)=> {
   let templateHtml = `<div class="product-container">

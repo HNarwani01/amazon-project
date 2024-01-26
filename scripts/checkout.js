@@ -1,6 +1,6 @@
 import { cart } from "../data/cart.js";
 import { product } from "../data/products.js";
-import {formatcurrency} from '../utils/monkey.js'
+import {formatcurrency} from '../utils/money.js'
 cart.forEach(cartelement => {
   product.forEach(totalproduct => {
     if (cartelement.productid == totalproduct.id) {
