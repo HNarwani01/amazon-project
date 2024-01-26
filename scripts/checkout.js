@@ -6,7 +6,7 @@ cart.forEach(cartelement => {
   product.forEach(totalproduct => {
     if (cartelement.productid == totalproduct.id) {
       
-      let insidehtml = `<div class="cart-item-container">
+      let insidehtml = `<div class="cart-item-container js-cart-item-container-${totalproduct.id}">
 <div class="delivery-date">
   Delivery date: Tuesday, June 21
 </div>
@@ -93,6 +93,7 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((link) =>{
     console.log(produt);
     remoceFromCart(produt)
     console.log(cart)
+    document.querySelector(`.js-cart-item-container-${produt}`).remove()
   })
 })
 
