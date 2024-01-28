@@ -12,9 +12,21 @@ cart.forEach(cartelement => {
   product.forEach(totalproduct => {
     if (cartelement.productid == totalproduct.id) {
 
+      const deliveryOptionId = cartelement.deliveryOptionId;
+      let deliveryOption;
+      deliveryOptions.forEach(option => {
+        if (option.id === deliveryOptionId) {
+          deliveryOption = option;
+        }
+      });
+      const today = dayjs();
+      const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+      const dateString = deliveryDate.format('dddd, MMMM D');
+
+
       let insidehtml = `<div class="cart-item-container js-cart-item-container-${totalproduct.id}">
 <div class="delivery-date">
-  Delivery date: Tuesday, June 21
+  Delivery date: ${dateString}
 </div>
 
 <div class="cart-item-details-grid">
@@ -46,7 +58,7 @@ cart.forEach(cartelement => {
       Choose a delivery option:
     </div>
     
-    ${deliveryOptionsHTML(totalproduct)}
+    ${deliveryOptionsHTML(totalproduct, cartelement)}
     
   </div>
 </div>
@@ -57,16 +69,18 @@ cart.forEach(cartelement => {
 });
 
 
-function deliveryOptionsHTML(totalproduct) {
-  let html='';
+function deliveryOptionsHTML(totalproduct, cartelement) {
+  let html = '';
   deliveryOptions.forEach(deliveryOption => {
     const today = dayjs();
     const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
     const dateString = deliveryDate.format('dddd, MMMM D');
-    const priceString = deliveryOption.priceCents===0?'FREE':formatcurrency(deliveryOption.priceCents);
-    html +=`
+    const priceString = deliveryOption.priceCents === 0 ? 'FREE' : formatcurrency(deliveryOption.priceCents);
+    const isChecked = deliveryOption.id === cartelement.deliveryOptionId;
+    html += `
       <div class="delivery-option">
       <input type="radio"
+        ${isChecked ? 'checked' : ''}
         class="delivery-option-input"
         name="delivery-option-${totalproduct.id}">
       <div>
@@ -79,8 +93,8 @@ function deliveryOptionsHTML(totalproduct) {
       </div>
     </div>
   `
-})
-return html;
+  })
+  return html;
 }
 document.querySelectorAll('.js-delete-quantity-link').forEach((link) => {
   link.addEventListener('click', () => {
